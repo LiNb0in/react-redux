@@ -21,17 +21,19 @@ function warnAboutReceivingStore() {
 
 export function createProvider(storeKey = 'store') {
     const subscriptionKey = `${storeKey}Subscription`
-
+    // HOC
     class Provider extends Component {
+        //  拿到
         getChildContext() {
           return { [storeKey]: this[storeKey], [subscriptionKey]: null }
         }
 
         constructor(props, context) {
           super(props, context)
+          // 拿到Perovider标签上注入的store
           this[storeKey] = props.store;
         }
-
+        
         render() {
           return Children.only(this.props.children)
         }
